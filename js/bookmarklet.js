@@ -10,11 +10,15 @@
     js.src = src;
     js.id = id;
     var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(js, s);
+    if(s) {
+      s.parentNode.insertBefore(js, s);
+    } else {
+      document.body.appendChild(js);
+    }
   }
 
   add_js('http://192.168.1.20:9999/readability.js');
   add_js('http://192.168.1.20:9999/jquery-1.7.2.js');
-  
+
 
 })();

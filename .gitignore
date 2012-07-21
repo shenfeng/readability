@@ -1,0 +1,5 @@
+.classpath
+*.html
+.project
+target
+.settings
