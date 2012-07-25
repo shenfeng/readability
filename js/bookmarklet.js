@@ -17,8 +17,5 @@
     }
   }
 
-  add_js('http://192.168.1.20:9999/readability.js');
-  add_js('http://192.168.1.20:9999/jquery-1.7.2.js');
-
-
+  add_js('http://192.168.1.3:9999/readability.js');
 })();
