@@ -1,5 +1,6 @@
 .classpath
-*.html
 .project
+src/test/resources/*.html
 target
 .settings
+/js/index2.html
