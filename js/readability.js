@@ -1,8 +1,12 @@
 (function () {
 
+  // BAD case
+  // http://www.javaworld.com/javaworld/jw-04-2012/120419-fatal-exception.html?source=nww_rss
+  // $('#stack-title').text('');
   function without_space_length (node) {
+    var text = node.innerText || node.textContent; // firefox
     // remove space
-    return node.innerText.replace(/\s+/g, '').length;
+    return text.replace(/\s+/g, '').length;
   }
 
   function sub_a_text_length (node) {
@@ -26,12 +30,17 @@
     console.log(fn.name + '   ' + ((new Date) - start) + 'ms');
   }
 
+  function link_count (node) {
+    var alla = node.querySelectorAll('a');
+
+  }
+
   function mark_node () {
     var body_length = node_text_length(document.body);
-    var allnodes= document.body.querySelectorAll('div, article');
+    var allnodes= document.querySelectorAll('div, article, body');
     var nodes = [];
 
-    console.log(body_length);
+    console.log('body-length', body_length);
 
     for(var i = 0; i < allnodes.length; i++) {
       var node = allnodes[i];
@@ -46,7 +55,7 @@
           link_count: link_count,
           text: text_length,
           ratio: text_length / link_count,
-          text_full: node.innerText.length
+          text_full: without_space_length(node)
         });
       }
     }
