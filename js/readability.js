@@ -1,4 +1,50 @@
 (function () {
+  var IGNORE_TAGS = ['a', 'script', '#comment'];
+
+
+  function ignore_tag (node, ignored) {
+    var name = node.nodeName;
+    for(var i = 0; i < ignored.length; i++) {
+      if(ignored[i] === name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  function traverse_node (node, tags, cb) {
+    var root = node;
+    var depth = 0;
+    while(node) {
+      var ignore = ignore_tag(node, tags);
+      if(!ignore) {
+        cb(node, depth);
+      }
+
+      if(!ignore && node.childNodes.length) {
+        node = node.childNodes[0];
+        depth ++;
+      } else {
+
+        while(node.nextSibling === null && depth > 0) {
+          node = node.parentNode;
+          depth --;
+        }
+
+        if(node === root) {
+          break;
+        }
+
+        node = node.nextSibling;
+      }
+    }
+  }
+  
+  traverse_node(document.body, [], function (n) { console.log(n); });
+
+
+  window.traverse_node = traverse_node;
 
   // BAD case
   // http://www.javaworld.com/javaworld/jw-04-2012/120419-fatal-exception.html?source=nww_rss
